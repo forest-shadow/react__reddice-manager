@@ -7,7 +7,8 @@ import webpackConfig from '../webpack.config.dev.js'
 
 let app = express()
 
-app.use(webpackMiddleware(webpack(webpackConfig)))
+const webpackCompiler = webpack(webpackConfig)
+app.use(webpackMiddleware(webpackCompiler))
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './index.html'))
