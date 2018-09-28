@@ -1,11 +1,16 @@
 import React, { Component } from 'react'
 import { hot } from 'react-hot-loader'
 
-import Greetings from './Greetings'
+import NavigationBar from './NavigationBar'
 
 class App extends Component {
   render() {
-    return (<Greetings />)
+    return (
+      <div className="container">
+        <NavigationBar />
+        {this.props.children}
+      </div>
+    )
   }
 }
 

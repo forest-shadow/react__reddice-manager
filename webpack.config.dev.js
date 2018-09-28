@@ -22,7 +22,10 @@ export default {
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'client'),
         exclude: /node_modules/,
-        use: ['babel-loader']
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react']
+        }
       }
     ]
   },
