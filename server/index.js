@@ -4,11 +4,17 @@ import path from 'path'
 import webpack from 'webpack'
 import webpackMiddleware from 'webpack-dev-middleware'
 import webpackConfig from '../webpack.config.dev.js'
+import webpackHotMiddleware from 'webpack-hot-middleware'
 
 let app = express()
 
 const webpackCompiler = webpack(webpackConfig)
-app.use(webpackMiddleware(webpackCompiler))
+app.use(webpackMiddleware(webpackCompiler, {
+  hot: true,
+  publicPath: webpackConfig.output.publicPath,
+  noInfo: true
+}))
+app.use(webpackHotMiddleware(webpackCompiler))
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './index.html'))
