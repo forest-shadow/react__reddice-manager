@@ -25,4 +25,4 @@ SignupPage.propTypes = {
   userSignupRequest: PropTypes.func.isRequired
 }
 
-export default connect(null, { userSignupRequest})(hot(module)(SignupPage))
+export default connect(null, { userSignupRequest })(hot(module)(SignupPage))
