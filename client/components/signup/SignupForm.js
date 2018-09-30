@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import TextFieldGroup from '../common/TextFieldGroup'
+
+import validateInput from '../../../server/shared/validations/signup'
 import timezones from '../../data/timezones'
 
 class SignupForm extends Component {
@@ -28,12 +31,29 @@ class SignupForm extends Component {
     })
   }
 
+  isValid() {
+    const { errors, isValid } = validateInput(this.state)
+
+    if (!isValid) {
+      this.setState({ errors })
+    }
+
+    return isValid
+  }
+
   onSubmit(e) {
-    this.setState({ errors: {}, isLoading: true })
     e.preventDefault()
-    this.props.userSignupRequest(this.state)
-      .then(response => {})
-      .catch((errResponse) => this.setState({ errors: errResponse.response.data, isLoading: false }))
+
+    if (this.isValid()) {
+      this.setState({ errors: {}, isLoading: true })
+
+      this.props.userSignupRequest(this.state)
+        .then(response => {})
+        .catch((errResponse) => this.setState({
+          errors: errResponse.response.data,
+          isLoading: false
+        }))
+    }
   }
 
   render() {
@@ -44,59 +64,40 @@ class SignupForm extends Component {
       <form onSubmit={this.onSubmit}>
         <h1>Join our community</h1>
 
-        <div className="form-group">
-          <label className="control-label">Username</label>
-          <input
-            value={this.state.username}
-            onChange={this.onChange}
-            type="text"
-            name="username"
-            className={classnames("form-control", { 'is-invalid': errors.username })}
-          />
-          {errors.username && <span className="invalid-feedback">{errors.username}</span>}
-        </div>
+        <TextFieldGroup
+          error={errors.username}
+          label="Username"
+          onChange={this.onChange}
+          field="username"
+        />
 
-        <div className="form-group">
-          <label className="control-label">Email</label>
-          <input
-            value={this.state.email}
-            onChange={this.onChange}
-            type="text"
-            name="email"
-            className={classnames("form-control", { 'is-invalid': errors.email })}
-          />
-          {errors.username && <span className="invalid-feedback">{errors.username}</span>}
-        </div>
+        <TextFieldGroup
+          error={errors.email}
+          label="Email"
+          onChange={this.onChange}
+          field="email"
+        />
 
-        <div className="form-group">
-          <label className="control-label">Password</label>
-          <input
-            value={this.state.password}
-            onChange={this.onChange}
-            type="password"
-            name="password"
-            className={classnames("form-control", { 'is-invalid': errors.password })}
-          />
-          {errors.password && <span className="invalid-feedback">{errors.password}</span>}
-        </div>
+        <TextFieldGroup
+          error={errors.password}
+          label="Password"
+          onChange={this.onChange}
+          field="password"
+          type="password"
+        />
 
-        <div className="form-group">
-          <label className="control-label">Password Confirmation</label>
-          <input
-            value={this.state.passwordConfirmation}
-            onChange={this.onChange}
-            type="password"
-            name="passwordConfirmation"
-            className={classnames("form-control", { 'is-invalid': errors.passwordConfirmation })}
-          />
-          {errors.passwordConfirmation && <span className="invalid-feedback">{errors.passwordConfirmation}</span>}
-        </div>
+        <TextFieldGroup
+          error={errors.passwordConfirmation}
+          label="Password Confirmation"
+          onChange={this.onChange}
+          field="passwordConfirmation"
+          type="password"
+        />
 
         <div className="form-group">
           <label className="control-label">Timezone</label>
           <select
             className={classnames("form-control", { 'is-invalid': errors.timezone })}
-            value={this.state.timezone}
             onChange={this.onChange}
             name="timezone"
           >
