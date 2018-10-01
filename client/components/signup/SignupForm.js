@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import history from '../../providers/historyProvider'
 import TextFieldGroup from '../common/TextFieldGroup'
 
 import validateInput from '../../../server/shared/validations/signup'
@@ -48,7 +49,7 @@ class SignupForm extends Component {
       this.setState({ errors: {}, isLoading: true })
 
       this.props.userSignupRequest(this.state)
-        .then(response => {})
+        .then(() => { history.push('/') })
         .catch((errResponse) => this.setState({
           errors: errResponse.response.data,
           isLoading: false
@@ -101,7 +102,7 @@ class SignupForm extends Component {
             onChange={this.onChange}
             name="timezone"
           >
-            <option value="" disabled>Choose Your Timezone</option>
+            <option value="">Choose Your Timezone</option>
             {options}
           </select>
           {errors.timezone && <span className="invalid-feedback">{errors.timezone}</span>}

@@ -1,12 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route } from 'react-router'
-import createBrowserHistory from 'history/createBrowserHistory'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 
-const history = createBrowserHistory()
+import history from './providers/historyProvider'
 
 import App from './components/App'
 import Greetings from './components/Greetings'
