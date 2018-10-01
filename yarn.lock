@@ -2941,6 +2941,11 @@ nan@^2.9.2:
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.11.0.tgz#574e360e4d954ab16966ec102c0c049fd961a099"
   integrity sha512-F4miItu2rGnV2ySkXOQoA8FKz/SR2Q2sWP0sbTxNxz/tuokeC8WxOhPMcwi0qIyGtVn/rrSeLbvVkznqCdwYnw==
 
+nanoid@^1.0.7:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-1.2.5.tgz#122bcd6bf185651480369315f20c9ae1519efc35"
+  integrity sha512-mOYdCQS3xdgu81Hg3EQEhORykMk53Pkzg15Y6I+O9T3db9qHPf9z6nXzQBCUaHXlQs57eRKotDTzYlYACL+5uA==
+
 nanomatch@^1.2.9:
   version "1.2.13"
   resolved "https://registry.yarnpkg.com/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
@@ -3626,6 +3631,11 @@ readdirp@^2.0.0:
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
 
+redux-devtools-extension@^2.13.5:
+  version "2.13.5"
+  resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.5.tgz#3ff34f7227acfeef3964194f5f7fc2765e5c5a39"
+  integrity sha512-QQ9BRy77oURHMdGys9rfQcCQDzXZ1T4oW+eUyE5Cg7DNVau69HJzc4YNDMOmpi0Dzpi1zOQgQ2rUpgJta4Lfqg==
+
 redux-thunk@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
@@ -3925,6 +3935,13 @@ shebang-regex@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
   integrity sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
+
+shortid@^2.2.13:
+  version "2.2.13"
+  resolved "https://registry.yarnpkg.com/shortid/-/shortid-2.2.13.tgz#b2441e71c664ace458a341d343959f677910ef5b"
+  integrity sha512-dBuNnQGKrJNfjunmXI2X7bl1gnMO4PwbNxrTzO1JvilODmL7WyyCtA+DYxe9XunLXmxmgzFIvKPQ6XRAQrr46Q==
+  dependencies:
+    nanoid "^1.0.7"
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"

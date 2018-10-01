@@ -49,7 +49,13 @@ class SignupForm extends Component {
       this.setState({ errors: {}, isLoading: true })
 
       this.props.userSignupRequest(this.state)
-        .then(() => { history.push('/') })
+        .then(() => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'You signed up successfully. Welcome!'
+          })
+          history.push('/')
+        })
         .catch((errResponse) => this.setState({
           errors: errResponse.response.data,
           isLoading: false
@@ -122,7 +128,8 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-  userSignupRequest: PropTypes.func.isRequired
+  userSignupRequest: PropTypes.func.isRequired,
+  addFlashMessage: PropTypes.func.isRequired
 }
 
 export default SignupForm

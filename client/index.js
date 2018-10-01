@@ -2,7 +2,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route } from 'react-router'
 import { createStore, applyMiddleware } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
+import rootReducer from './reducers/rootReducer'
 import thunk from 'redux-thunk'
 
 import history from './providers/historyProvider'
@@ -12,8 +14,10 @@ import Greetings from './components/Greetings'
 import SignupPage from './components/signup/SignupPage'
 
 const store = createStore(
-  (state = {}) => state,
-  applyMiddleware(thunk)
+  rootReducer,
+  composeWithDevTools(
+    applyMiddleware(thunk)
+  )
 )
 
 ReactDOM.render(
