@@ -6,7 +6,7 @@ class NavigationBar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
         <Link className="navbar-brand" to="/">Red Dice</Link>
 
         <ul className="navbar-nav ml-auto">
