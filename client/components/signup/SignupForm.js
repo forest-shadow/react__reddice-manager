@@ -19,17 +19,41 @@ class SignupForm extends Component {
       passwordConfirmation: '',
       timezone: '',
       errors: {},
-      isLoading: false
+      isLoading: false,
+      invalid: false
     }
 
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
+    this.checkUserExists = this.checkUserExists.bind(this)
   }
 
   onChange(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  checkUserExists(e) {
+    const field = e.target.name
+    const val = e.target.value
+
+    if (val !== '') {
+      this.props.isUserExists(val).then(res => {
+        let errors = this.state.errors
+        let invalid
+
+        if (res.data.user) {
+          errors[field] = 'There is user with such ' + field
+          invalid = true
+        } else {
+          errors[field] = ''
+          invalid = false
+        }
+
+        this.setState({ errors, invalid })
+      })
+    }
   }
 
   isValid() {
@@ -75,6 +99,7 @@ class SignupForm extends Component {
           error={errors.username}
           label="Username"
           onChange={this.onChange}
+          checkUserExists={this.checkUserExists}
           field="username"
         />
 
@@ -82,6 +107,7 @@ class SignupForm extends Component {
           error={errors.email}
           label="Email"
           onChange={this.onChange}
+          checkUserExists={this.checkUserExists}
           field="email"
         />
 
@@ -89,6 +115,7 @@ class SignupForm extends Component {
           error={errors.password}
           label="Password"
           onChange={this.onChange}
+          checkUserExists={this.checkUserExists}
           field="password"
           type="password"
         />
@@ -117,7 +144,7 @@ class SignupForm extends Component {
         <div className="form-group">
           <button
             className="btn btn-primary mt-2"
-            disabled={this.state.isLoading}
+            disabled={this.state.isLoading || this.state.invalid }
           >
             Sign up
           </button>
@@ -129,7 +156,8 @@ class SignupForm extends Component {
 
 SignupForm.propTypes = {
   userSignupRequest: PropTypes.func.isRequired,
-  addFlashMessage: PropTypes.func.isRequired
+  addFlashMessage: PropTypes.func.isRequired,
+  isUserExists: PropTypes.func.isRequired
 }
 
 export default SignupForm
