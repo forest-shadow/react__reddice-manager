@@ -1,10 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+
 import { login } from '../../actions/login'
-
 import validateInput from '../../../server/shared/validations/login'
-
 import TextFieldGroup from '../common/TextFieldGroup'
 
 class LoginForm extends Component {
@@ -38,8 +37,12 @@ class LoginForm extends Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true })
       this.props.login(this.state)
-        .then((res) => this.context.router.push('/'))
-        .catch((error) => this.setState({ errors: error.data.errors, isLoading: false }))
+        .then((res) => {
+          this.context.router.history.push('/')
+        })
+        .catch((errResponse) => {
+          this.setState({ errors: errResponse.response.data.error, isLoading: false })
+        })
     }
   }
 
@@ -53,6 +56,8 @@ class LoginForm extends Component {
     return (
       <form onSubmit={this.onSubmit}>
         <h1>Login</h1>
+
+        { errors.form && <div className="alert alert-danger">{errors.form}</div> }
 
         <TextFieldGroup
           field="identifier"
