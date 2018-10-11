@@ -35,5 +35,9 @@ export default {
   resolve: {
     extensions: ['.js']
   },
-  mode: 'development'
+  mode: 'development',
+  node: {
+    net: 'empty',
+    dns: 'empty'
+  }
 }

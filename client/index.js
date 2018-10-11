@@ -6,13 +6,16 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers/rootReducer'
 import thunk from 'redux-thunk'
+import jwt from 'jsonwebtoken'
 
 import history from './providers/historyProvider'
+import setAuthorizationToken from './utils/setAuthorizationToken'
 
 import App from './components/App'
 import Greetings from './components/Greetings'
 import SignupPage from './components/signup/SignupPage'
 import LoginPage from './components/login/LoginPage'
+import { setCurrentUser } from './actions/authActions'
 
 const store = createStore(
   rootReducer,
@@ -20,6 +23,11 @@ const store = createStore(
     applyMiddleware(thunk)
   )
 )
+
+if (localStorage.jwtToken) {
+  setAuthorizationToken(localStorage.jwtToken)
+  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)))
+}
 
 ReactDOM.render(
   <Provider store={store}>
