@@ -15,6 +15,7 @@ import App from './components/App'
 import Greetings from './components/Greetings'
 import SignupPage from './components/signup/SignupPage'
 import LoginPage from './components/login/LoginPage'
+import NewEventPage from './components/events/NewEventPage'
 import { setCurrentUser } from './actions/authActions'
 
 const store = createStore(
@@ -36,6 +37,7 @@ ReactDOM.render(
         <Route exact path='/' component={Greetings} />
         <Route path='/signup' component={SignupPage} />
         <Route path='/login' component={LoginPage} />
+        <Route path="/new-event" component={NewEventPage} />
       </App>
     </Router>
   </Provider>,
