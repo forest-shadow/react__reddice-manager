@@ -6,7 +6,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers/rootReducer'
 import thunk from 'redux-thunk'
-import jwt from 'jsonwebtoken'
+import jwtDecode from 'jwt-decode'
 
 import history from './providers/historyProvider'
 import setAuthorizationToken from './utils/setAuthorizationToken'
@@ -27,7 +27,7 @@ const store = createStore(
 
 if (localStorage.jwtToken) {
   setAuthorizationToken(localStorage.jwtToken)
-  store.dispatch(setCurrentUser(jwt.decode(localStorage.jwtToken)))
+  store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)))
 }
 
 ReactDOM.render(
