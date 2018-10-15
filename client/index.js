@@ -10,6 +10,7 @@ import jwtDecode from 'jwt-decode'
 
 import history from './providers/historyProvider'
 import setAuthorizationToken from './utils/setAuthorizationToken'
+import requireAuth from './utils/requireAuth'
 
 import App from './components/App'
 import Greetings from './components/Greetings'
@@ -37,7 +38,7 @@ ReactDOM.render(
         <Route exact path='/' component={Greetings} />
         <Route path='/signup' component={SignupPage} />
         <Route path='/login' component={LoginPage} />
-        <Route path="/new-event" component={NewEventPage} />
+        <Route path="/new-event" component={requireAuth(NewEventPage)} />
       </App>
     </Router>
   </Provider>,

@@ -17,6 +17,9 @@ class NavigationBar extends Component {
     const userLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
+          <Link className="nav-link" to="/new-event">Create new Event</Link>
+        </li>
+        <li className="nav-item">
           <a href="#" className="nav-link" onClick={this.logout.bind(this)}>Logout</a>
         </li>
       </ul>
